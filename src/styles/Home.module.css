@@ -26,6 +26,7 @@
 
   .container {
     flex-direction: column;
+    margin-top: 20px;
   }
 
   .container > * {
