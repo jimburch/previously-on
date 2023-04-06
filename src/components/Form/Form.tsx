@@ -1,6 +1,14 @@
 import { FormikValues, useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, CircularProgress, Input, Textarea } from "@mui/joy";
+import {
+  Button,
+  CircularProgress,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Textarea,
+} from "@mui/joy";
 
 import styles from "./Form.module.css";
 
@@ -70,33 +78,48 @@ const Form = ({ setDescription, setIsSubmitted }: FormProps) => {
 
   return (
     <form className={styles.root} onSubmit={formik.handleSubmit}>
-      <label htmlFor="title">Book Title</label>
-      <Input
-        id="title"
-        name="title"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.title}
-        error={formik.touched.title && Boolean(formik.errors.title)}
-      />
-      <label htmlFor="author">Author</label>
-      <Input
-        id="author"
-        name="author"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.author}
-        error={formik.touched.author && Boolean(formik.errors.author)}
-      />
-      <label htmlFor="bookmark">The Last Sentence Or Two You Read</label>
-      <Textarea
-        id="bookmark"
-        name="bookmark"
-        onChange={formik.handleChange}
-        value={formik.values.bookmark}
-        error={formik.touched.bookmark && Boolean(formik.errors.bookmark)}
-        minRows={4}
-      />
+      <FormControl>
+        <FormLabel htmlFor="title">Book Title</FormLabel>
+        <Input
+          id="title"
+          name="title"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.title}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+        />
+      </FormControl>
+      <FormControl>
+        <FormLabel htmlFor="author">Author</FormLabel>
+        <Input
+          id="author"
+          name="author"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.author}
+          error={formik.touched.author && Boolean(formik.errors.author)}
+        />
+      </FormControl>
+      <FormControl>
+        <FormLabel htmlFor="bookmark">The Last Text You Read</FormLabel>
+        <Textarea
+          id="bookmark"
+          name="bookmark"
+          onChange={formik.handleChange}
+          value={formik.values.bookmark}
+          error={formik.touched.bookmark && Boolean(formik.errors.bookmark)}
+          minRows={4}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              formik.handleSubmit();
+            }
+          }}
+        />
+        <FormHelperText>
+          The more text you give, the more accurate the summary.
+        </FormHelperText>
+      </FormControl>
       <Button
         startDecorator={
           formik.isSubmitting ? (
