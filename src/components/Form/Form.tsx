@@ -120,21 +120,23 @@ const Form = ({ setDescription, setIsSubmitted }: FormProps) => {
           The more text you give, the more accurate the summary.
         </FormHelperText>
       </FormControl>
-      <Button
-        startDecorator={
-          formik.isSubmitting ? (
-            <CircularProgress
-              variant="plain"
-              thickness={2}
-              sx={{ "--CircularProgress-size": "16px" }}
-            />
-          ) : null
-        }
-        type="submit"
-        disabled={formik.isSubmitting}
-      >
-        {formik.isSubmitting ? "Generating" : "Submit"}
-      </Button>
+      <FormControl>
+        <Button
+          startDecorator={
+            formik.isSubmitting ? (
+              <CircularProgress
+                variant="plain"
+                thickness={2}
+                sx={{ "--CircularProgress-size": "16px" }}
+              />
+            ) : null
+          }
+          type="submit"
+          disabled={formik.isSubmitting}
+        >
+          {formik.isSubmitting ? "Generating" : "Submit"}
+        </Button>
+      </FormControl>
     </form>
   );
 };
