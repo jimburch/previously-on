@@ -13,7 +13,7 @@ const Description = ({ description, isSubmitted }: DescriptionProps) => {
       {!isSubmitted ? (
         <Typography>
           {
-            "Halfway through a good book but it's been a while since you read the last page? Enter the book title, author, and the last few sentences you read. Previously On will generate a summary, explain the major charaters, and catch you up to the exact spot where you're reading."
+            "Halfway through a good book but it's been a while since you read the last page? Upload a picture of the last page you read and we'll generate a summary, explain major characters, and catch you up to the exact spot you left off!"
           }
         </Typography>
       ) : null}

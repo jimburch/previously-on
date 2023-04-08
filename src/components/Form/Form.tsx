@@ -11,6 +11,7 @@ import {
 } from "@mui/joy";
 
 import styles from "./Form.module.css";
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 type FormProps = {
   setDescription: (description: any) => void;
@@ -20,14 +21,15 @@ type FormProps = {
 const Form = ({ setDescription, setIsSubmitted }: FormProps) => {
   const formik = useFormik({
     initialValues: {
-      title: "",
-      author: "",
-      bookmark: "",
+      // title: "",
+      // author: "",
+      // bookmark: "",
+      image: null,
     },
     validationSchema: Yup.object({
-      title: Yup.string().required("Required"),
-      author: Yup.string().required("Required"),
-      bookmark: Yup.string().required("Required"),
+      // title: Yup.string().required("Required"),
+      // author: Yup.string().required("Required"),
+      // bookmark: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
       handleSubmit(values);
@@ -39,7 +41,8 @@ const Form = ({ setDescription, setIsSubmitted }: FormProps) => {
     setIsSubmitted(true);
     formik.setSubmitting(true);
 
-    const { title, author, bookmark } = values;
+    const { title, author, bookmark, image } = values;
+    console.log(image);
 
     const response = await fetch("/api/openai", {
       method: "POST",
@@ -78,7 +81,7 @@ const Form = ({ setDescription, setIsSubmitted }: FormProps) => {
 
   return (
     <form className={styles.root} onSubmit={formik.handleSubmit}>
-      <FormControl>
+      {/* <FormControl>
         <FormLabel htmlFor="title">Book Title</FormLabel>
         <Input
           id="title"
@@ -119,6 +122,9 @@ const Form = ({ setDescription, setIsSubmitted }: FormProps) => {
         <FormHelperText>
           The more text you give, the more accurate the summary.
         </FormHelperText>
+      </FormControl> */}
+      <FormControl>
+        <ImageUpload setFieldValue={formik.setFieldValue} />
       </FormControl>
       <FormControl>
         <Button
